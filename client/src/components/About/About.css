@@ -1,0 +1,53 @@
+@font-face { font-family: Foul Fiend; 
+    src: url('../../fonts/Foul Fiend/Foul Fiend.ttf'); } 
+
+    @font-face { font-family: Sono; 
+        src: url('../../fonts/Sono/static/ttf/Sono-Regular.ttf'); } 
+
+.About{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    width: 75vw;
+    border: 1px solid black;
+    font-weight: bold;
+    font-size: 34;
+    color: #FAED26;
+}
+
+#ScratchDesc{
+    display: flex;
+    flex-direction: column;
+}
+
+#MainP{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+#vrf{
+    margin-left: .5vw;
+    margin-right: .5vw;
+    color: #2a5ada;
+    font-weight: bolder;
+    background-color: #46344E;
+}
+
+#MainP, #vrf, #RoundText, #cardProbText, p,  #cardPrice{
+    font-family: Sono;
+}
+
+
+table, th, td {
+    border: 1px solid black;
+  }
+
+  #distribution{
+      margin-top: 10vh;
+  }
+
+
