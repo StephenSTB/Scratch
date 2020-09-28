@@ -13,12 +13,9 @@ class TopBar extends Component{
     constructor(props){
       super();
       this.props = props;
-
     }
     
-    
     render(){
-
       return(
         <div className = "NavBar">
               <NavLink to = "/" id = "ScratchName"> <h2>Scratch</h2></NavLink> 
@@ -30,7 +27,6 @@ class TopBar extends Component{
         </div>
       );
     }
-    
 }
 
 export default TopBar;

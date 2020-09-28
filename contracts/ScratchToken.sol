@@ -75,7 +75,6 @@ contract ScratchToken is ERC20Interface {
 
         LINK = LinkTokenInterface(0xa36085F69e2889c224210F603D836748e7dC0088);
         
-        //owner = msg.sender;
     }
 
     // function called by Scratch main contract to mint amount tokens

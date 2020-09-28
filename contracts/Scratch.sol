@@ -28,9 +28,6 @@ contract Scratch is VRFConsumerBase{
 
     event NewRound(uint totalPool, uint tokenSupply, uint mintAmount, uint roundNumber);
 
-    // Contract variable to get the LINK price.
-    //ScratchPriceConsumer private Client;
-
     // Contract variable to handle the current crypto scratch card game round.
     ScratchCardRound private CardRound;
 
@@ -96,7 +93,6 @@ contract Scratch is VRFConsumerBase{
      * Function to buy a card.
      */ 
     function buyScatchCard(uint userProvidedSeed) public{
-        //uint cardPrice = (2000000000000000000 / RequestLinkPrice()) * 100000000;
         // Determine Card price
         uint cardPrice = CardRound.getCardPrice() + fee;
         
@@ -122,12 +118,6 @@ contract Scratch is VRFConsumerBase{
         RequestIDtoAddress[requestID] = sender;
         return requestID;
     }
-
-    /*
-    function requestRandom(uint userProvidedSeed) public {
-        require(LINK.balanceOf(address(this)) > fee, "Not enough LINK - fill contract with faucet");
-        emit RequestID(requestRandomness(keyHash, fee, userProvidedSeed));
-    }*/
 
     /**
      * Callback function used by VRF Coordinator
@@ -195,24 +185,10 @@ contract Scratch is VRFConsumerBase{
     function getToken() public view returns(address TokenAddress){
         return address(Token);
     }
-    /*
-    function transferToContract(uint value) public returns(bool success){
-        return LINK.transferFrom(msg.sender, address(this), value);
-    }*/
 
     function getContractAllowance() public view returns(uint256 allowance){
         return LINK.allowance(msg.sender, address(this));
     }
-
-    /*
-    function requestLinkPrice() public view returns(uint256 price){
-        return uint(Client.getLatestPrice());
-    }*/
-
-    /*
-    function transferLinkToClient(uint value) public returns(bool success){
-        return LINK.transfer(address(Client), value);
-    }*/
 
     function getLinkBalance(address owner) public view returns(uint balance)
     {
@@ -326,20 +302,7 @@ contract ScratchCardRound {
     // 10x   - 1500   -     20 - 248338    - $30,000   15000
     // 30x   - 120    -     60 - 249858    -  $7,200   3600
     // 100x  - 40     -    200 - 249958    -  $8,000   4000 
-    // 5000x - 2      - 10,000 - 249998    - $20,000   10000
-
-    // SOLID OPTION 2
-    // ~ 250,000 plays to clear round ~ $500,000 given 2$ ticket.
-    // ~ 1/4 prize distribution of $125,000  1:8.462 prob per card of win.
-    //
-    //         tickets  base      thresh     remain    base $
-    // 1x    - 24500
-    // 2x    - 3500  -      4                         - $14,000  
-    // 10x   - 1400  -     20                         - $28,000
-    // 30x   - 100   -     60 - 249858                -  $6,000
-    // 100x  - 40    -    200 - 249958                -  $8,000        
-    // 5000x - 2     - 10,000 - 249998                - $20,000
-    
+    // 5000x - 2      - 10,000 - 249998    - $20,000   10000  
 }
 
 
