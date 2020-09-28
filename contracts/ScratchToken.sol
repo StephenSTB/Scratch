@@ -187,6 +187,5 @@ contract ScratchTokenSale{
     function saleOver() public view returns(bool over){
         return block.number > endblock;
     }
-
 }
 

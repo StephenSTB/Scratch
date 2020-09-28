@@ -226,7 +226,7 @@ contract ScratchCardRound {
 
         MaxBlock = block.number + 576000;
 
-        winNumbers.push(39600);
+        winNumbers.push(39000);
         winNumbers.push(12000);
         winNumbers.push(4000);
         winNumbers.push(1500);

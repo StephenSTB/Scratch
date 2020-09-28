@@ -3,7 +3,6 @@ import "./Main.css";
 
 import scratchSurface from "../../logos/ScratchCard/ScratchSurface.png";
 
-
 function Canvas() {
     const canvasRef = useRef(null);
 

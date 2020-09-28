@@ -62,7 +62,7 @@ class About extends Component{
                         </tr>
                         <tr>
                             <td>
-                                {this.state.unclaimedPrizes[0][0]} of 39000
+                                {this.state.unclaimedPrizes[0][0]} of 39600
                             </td>
                             <td>
                                 .5x
