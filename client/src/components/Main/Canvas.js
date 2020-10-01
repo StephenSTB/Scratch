@@ -18,7 +18,7 @@ function Canvas() {
 
         img.width = window.innerWidth * .7;
         img.height = window.innerHeight *.2;
-
+        
         window.onresize = function () {
             img.width = window.innerWidth * .7;
             img.height = window.innerHeight *.2;
@@ -39,12 +39,12 @@ function Canvas() {
         canvas.addEventListener('mousedown', function (e){
             isPress = true;
             old = {x: e.offsetX, y: e.offsetY};
-            console.log("pressed");
+            //console.log("pressed");
         });
 
         canvas.addEventListener('mousemove', function (e){
         if (isPress) {
-            console.log("move");
+            //console.log("move");
 
             var x = e.offsetX;
             var y = e.offsetY;

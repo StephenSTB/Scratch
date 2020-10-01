@@ -84,6 +84,8 @@ contract Scratch is VRFConsumerBase{
 
         RoundNumber = 1;
 
+        AddressToRound[0x60A750f8f101e8BCE54852849105d2Ced89f1a18] = RoundNumber;
+        
         Token = scratchToken;
 
         MintAmount = 10 ** 18;

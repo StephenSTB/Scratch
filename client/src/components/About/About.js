@@ -4,7 +4,7 @@ import "./About.css";
 
 class About extends Component{
 
-    state = {unclaimedPrizes: [[39600, 12000, 4000, 1500, 120, 40, 2], ['0','0','0','0','0','0','0']], cardPrice: '0'}
+    state = {unclaimedPrizes: [[39000, 12000, 4000, 1500, 120, 40, 2], ['0','0','0','0','0','0','0']], cardPrice: '0'}
     constructor(props){
         super();
         this.props = props;
@@ -62,7 +62,7 @@ class About extends Component{
                         </tr>
                         <tr>
                             <td>
-                                {this.state.unclaimedPrizes[0][0]} of 39600
+                                {this.state.unclaimedPrizes[0][0]} of 39000
                             </td>
                             <td>
                                 .5x

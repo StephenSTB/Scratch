@@ -1,6 +1,6 @@
 pragma solidity >=0.6.0;
 
-import "../client/node_modules/@chainlink/contracts/src/v0.6/interfaces/LinkTokenInterface.sol";
+import "./node_modules/@chainlink/contracts/src/v0.6/interfaces/LinkTokenInterface.sol";
 
 import "./Scratch.sol";
 
@@ -50,6 +50,8 @@ contract ScratchToken is ERC20Interface {
 
     LinkTokenInterface private LINK;
 
+    event Round(uint playerRound, uint currentRound);
+
     /*
     NOTE:
     The following variables are OPTIONAL vanities. One does not have to include them.
@@ -75,6 +77,7 @@ contract ScratchToken is ERC20Interface {
 
         LINK = LinkTokenInterface(0xa36085F69e2889c224210F603D836748e7dC0088);
         
+        //owner = msg.sender;
     }
 
     // function called by Scratch main contract to mint amount tokens
@@ -96,6 +99,7 @@ contract ScratchToken is ERC20Interface {
 
     function transfer(address _to, uint256 _value) public override returns (bool success) {
         require(balances[msg.sender] >= _value, "token balance is lower than the value requested");
+        emit Round(Scratch(scratch).getPlayerRound(_to), Scratch(scratch).getRound());
         require(Scratch(scratch).getPlayerRound(_to) == Scratch(scratch).getRound(), "The players round must be current round.");
         balances[msg.sender] -= _value;
         balances[_to] += _value;
@@ -139,6 +143,8 @@ contract ScratchTokenSale{
 
     uint saleTotalTokens;
 
+    uint totalLinkProvided;
+
     mapping(address => bool) public poolProviders;
 
     mapping(address => uint) linkProvided;
@@ -158,7 +164,7 @@ contract ScratchTokenSale{
     constructor() public{
         LINK = LinkTokenInterface(0xa36085F69e2889c224210F603D836748e7dC0088);
         scratchToken = msg.sender;
-        endblock = block.number + 100; //19200; // about three days worth of time to donate to the contract
+        endblock = block.number + 2; //19200; // about three days worth of time to donate to the contract
         saleTotalTokens = 237500;
 
         poolProviders[0x60A750f8f101e8BCE54852849105d2Ced89f1a18] = true;
@@ -172,14 +178,15 @@ contract ScratchTokenSale{
         require(providerAllowance > 10 ** 18, "Must provide more then one link");
         LINK.transferFrom(msg.sender, scratchToken, providerAllowance);
         linkProvided[msg.sender] += providerAllowance;
-        emit SuppliedPool(LINK.balanceOf(address(scratchToken)), linkProvided[msg.sender]);
+        totalLinkProvided += providerAllowance;
+        emit SuppliedPool(totalLinkProvided, linkProvided[msg.sender]);
     }
 
     function recieveTokens() public{
         require(saleOver(), "The sale is not over yet.");
         require(claimed[msg.sender] == false, "Tokens already claimed by this address");
         claimed[msg.sender] == true;
-        uint receivedTokens = (linkProvided[msg.sender] /(LINK.balanceOf(address(scratchToken)) / 10 ** 18)) * saleTotalTokens;
+        uint receivedTokens = (linkProvided[msg.sender] / (totalLinkProvided / (10 ** 18))) * saleTotalTokens;
         ScratchToken(scratchToken).transfer(msg.sender, receivedTokens);
         emit ReceivedTokens(receivedTokens);
     }
@@ -187,5 +194,6 @@ contract ScratchTokenSale{
     function saleOver() public view returns(bool over){
         return block.number > endblock;
     }
+
 }
 

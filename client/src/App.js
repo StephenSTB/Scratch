@@ -40,8 +40,8 @@ class App extends Component {
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
 
-      const deployedNetwork = ScratchToken.networks[networkId];
-      const tokenInstance = new web3.eth.Contract( ScratchToken.abi, deployedNetwork && deployedNetwork.address,);
+      //const deployedNetwork = ScratchToken.networks[networkId];
+      const tokenInstance = new web3.eth.Contract( ScratchToken.abi, "0xc37cb63300bfd69678bfee5990452f9c83746d06");
 
       console.log("Scratch Token Address: " + tokenInstance.options.address);
 
